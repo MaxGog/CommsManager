@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CommsManager.Views.Components.CommissionCard"
+             x:Name="CommissionCardRoot">
+    
+    <Frame Style="{StaticResource CardFrameStyle}"
+           Padding="16"
+           Margin="8">
+        
+        <Grid ColumnDefinitions="Auto,*,Auto"
+              RowDefinitions="Auto,Auto,Auto,Auto"
+              RowSpacing="8"
+              ColumnSpacing="12">
+            
+            <BoxView Grid.Row="0" Grid.Column="0" Grid.RowSpan="4"
+                     WidthRequest="4"
+                     HorizontalOptions="Start"
+                     VerticalOptions="Fill"
+                     CornerRadius="2">
+                <BoxView.Style>
+                    <Style TargetType="BoxView">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Status}" Value="Queued" TargetType="BoxView">
+                                <Setter Property="Color" Value="{StaticResource SystemBaseLowColor}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Status}" Value="InProgress" TargetType="BoxView">
+                                <Setter Property="Color" Value="{StaticResource SystemAccentColor}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Status}" Value="Review" TargetType="BoxView">
+                                <Setter Property="Color" Value="{StaticResource SystemWarningColor}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Status}" Value="Completed" TargetType="BoxView">
+                                <Setter Property="Color" Value="{StaticResource SystemSuccessColor}" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </BoxView.Style>
+            </BoxView>
+
+            <Label Grid.Row="0" Grid.Column="1"
+                   Text="{Binding Title}"
+                   Style="{StaticResource TitleMediumLabelStyle}"
+                   MaxLines="1"
+                   LineBreakMode="TailTruncation" />
+
+            <Border Grid.Row="0" Grid.Column="2"
+                    Background="{StaticResource SystemAccentColor}"
+                    Padding="8,4"
+                    HorizontalOptions="End">
+                <Label Text="{Binding Priority}"
+                       TextColor="White"
+                       Style="{StaticResource BodySmallLabelStyle}"
+                       FontAttributes="Bold" />
+            </Border>
+
+            <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+                   Text="{Binding Customer.Name}"
+                   Style="{StaticResource BodyMediumLabelStyle}"
+                   TextColor="{StaticResource SystemBaseMediumColor}"
+                   MaxLines="1"
+                   LineBreakMode="TailTruncation" />
+
+            <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
+                  ColumnDefinitions="*,*"
+                  RowDefinitions="Auto,Auto">
+                
+                <Label Grid.Row="0" Grid.Column="0"
+                       Text="{Binding Price, StringFormat='Цена: {0:C}'}"
+                       Style="{StaticResource BodySmallLabelStyle}" />
+                
+                <Label Grid.Row="0" Grid.Column="1"
+                       Text="{Binding AdvancePayment, StringFormat='Аванс: {0:C}'}"
+                       Style="{StaticResource BodySmallLabelStyle}" />
+                
+                <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                       Style="{StaticResource BodySmallLabelStyle}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Дедлайн: " />
+                            <Span Text="{Binding Deadline, StringFormat='{0:dd.MM.yyyy}'}"
+                                  TextColor="{Binding IsDeadlineApproaching, Converter={StaticResource DeadlineColorConverter}}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </Grid>
+
+            <FlexLayout Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
+                        BindableLayout.ItemsSource="{Binding Tags}"
+                        Wrap="Wrap"
+                        AlignItems="Start">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="{StaticResource SystemBaseLowColor}"
+                                Padding="6,2"
+                                Margin="0,0,4,4">
+                            <Label Text="{Binding Tag.Name}"
+                                   Style="{StaticResource CaptionLabelStyle}"
+                                   TextColor="{StaticResource SystemBaseHighColor}" />
+                        </Border>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </FlexLayout>
+        </Grid>
+    </Frame>
+</ContentView>
