@@ -8,51 +8,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+                <ResourceDictionary Source="Resources/Converters.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-
-            <ResourceDictionary x:Key="LightTheme">
-                <Color x:Key="SystemBaseHighColor">#000000</Color>
-                <Color x:Key="SystemBaseMediumHighColor">#CC000000</Color>
-                <Color x:Key="SystemBaseMediumColor">#99000000</Color>
-                <Color x:Key="SystemBaseLowColor">#808080</Color>
-                <Color x:Key="SystemAltHighColor">#FFFFFF</Color>
-                <Color x:Key="SystemAltMediumHighColor">#CCFFFFFF</Color>
-                <Color x:Key="SystemAltMediumColor">#99FFFFFF</Color>
-                <Color x:Key="SystemAltLowColor">#66FFFFFF</Color>
-                <Color x:Key="SystemChromeLowColor">#F2F2F2</Color>
-                <Color x:Key="SystemChromeMediumLowColor">#E6E6E6</Color>
-                <Color x:Key="SystemChromeHighColor">#767676</Color>
-                <Color x:Key="BackgroundColor">#F5F5F5</Color>
-                <Color x:Key="TextColor">Black</Color>
-                <Color x:Key="FlyoutBackgroundColor">White</Color>
-            </ResourceDictionary>
-
-            <ResourceDictionary x:Key="DarkTheme">
-                <Color x:Key="SystemBaseHighColor">#FFFFFF</Color>
-                <Color x:Key="SystemBaseMediumHighColor">#CCFFFFFF</Color>
-                <Color x:Key="SystemBaseMediumColor">#99FFFFFF</Color>
-                <Color x:Key="SystemBaseLowColor">#666666</Color>
-                <Color x:Key="SystemAltHighColor">#000000</Color>
-                <Color x:Key="SystemAltMediumHighColor">#CC000000</Color>
-                <Color x:Key="SystemAltMediumColor">#99000000</Color>
-                <Color x:Key="SystemAltLowColor">#66000000</Color>
-                <Color x:Key="SystemChromeLowColor">#171717</Color>
-                <Color x:Key="SystemChromeMediumLowColor">#2B2B2B</Color>
-                <Color x:Key="SystemChromeHighColor">#898989</Color>
-                <Color x:Key="BackgroundColor">#0F0F0F</Color>
-                <Color x:Key="TextColor">White</Color>
-                <Color x:Key="FlyoutBackgroundColor">#1E1E1E</Color>
-            </ResourceDictionary>
-
-            <Color x:Key="SystemAccentColor">#0078D7</Color>
-            <Color x:Key="SystemAccentColorLight1">#2296F3</Color>
-            <Color x:Key="SystemAccentColorLight2">#DFD8F7</Color>
-            <Color x:Key="SystemAccentColorDark1">#005BA1</Color>
-            <Color x:Key="SystemAccentColorDark2">#004170</Color>
-
-            <SolidColorBrush x:Key="SystemControlBackgroundAltHighBrush" Color="{DynamicResource SystemAltHighColor}"/>
-            <SolidColorBrush x:Key="SystemControlForegroundBaseLowBrush" Color="{DynamicResource SystemBaseLowColor}"/>
-            <SolidColorBrush x:Key="SystemControlForegroundBaseHighBrush" Color="{DynamicResource SystemBaseHighColor}"/>
             
         </ResourceDictionary>
     </Application.Resources>
