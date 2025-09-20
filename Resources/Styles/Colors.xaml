@@ -28,6 +28,15 @@
     <Color x:Key="Gray900">#212121</Color>
     <Color x:Key="Gray950">#141414</Color>
 
+    <Color x:Key="SystemAccentColor">#0078D7</Color>
+    <Color x:Key="SystemBaseLowColor">#BFBFBF</Color>
+    <Color x:Key="SystemBaseMediumColor">#737373</Color>
+    <Color x:Key="SystemBaseHighColor">#000000</Color>
+    <Color x:Key="SystemAltMediumHighColor">#E6E6E6</Color>
+    <Color x:Key="SystemAltLowColor">#E6E6E6</Color>
+    <Color x:Key="SystemWarningColor">#D13438</Color>
+    <Color x:Key="SystemSuccessColor">#107C10</Color>
+
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
     <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>
