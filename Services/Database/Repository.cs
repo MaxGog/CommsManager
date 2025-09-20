@@ -54,16 +54,54 @@ public class Repository : IRepository, IDisposable
             .FirstOrDefaultAsync(c => c.Id == id);
     }
 
-    public async Task AddCommissionAsync(Commission commission)
+    public async Task<Commission> AddCommissionAsync(Commission commission)
     {
         await _context.Commissions.AddAsync(commission);
         await _context.SaveChangesAsync();
+        
+        await _context.Entry(commission)
+            .Reference(c => c.Customer)
+            .LoadAsync();
+        
+        await _context.Entry(commission)
+            .Collection(c => c.Tags)
+            .Query()
+            .Include(ct => ct.Tag)
+            .LoadAsync();
+        
+        await _context.Entry(commission)
+            .Collection(c => c.Artworks)
+            .LoadAsync();
+        
+        return commission;
     }
 
     public async Task UpdateCommissionAsync(Commission commission)
     {
+        var existingEntity = _context.ChangeTracker.Entries<Commission>()
+            .FirstOrDefault(e => e.Entity.Id == commission.Id);
+        
+        if (existingEntity != null)
+        {
+            existingEntity.State = EntityState.Detached;
+        }
+        
         _context.Commissions.Update(commission);
         await _context.SaveChangesAsync();
+        
+        await _context.Entry(commission)
+            .Reference(c => c.Customer)
+            .LoadAsync();
+        
+        await _context.Entry(commission)
+            .Collection(c => c.Tags)
+            .Query()
+            .Include(ct => ct.Tag)
+            .LoadAsync();
+        
+        await _context.Entry(commission)
+            .Collection(c => c.Artworks)
+            .LoadAsync();
     }
 
     public async Task DeleteCommissionAsync(int id)

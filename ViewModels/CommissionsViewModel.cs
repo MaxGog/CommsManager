@@ -28,6 +28,9 @@ public partial class CommissionsViewModel : BaseViewModel
     [ObservableProperty]
     private string _selectedSortOption = "По дате создания";
 
+    [ObservableProperty]
+    private bool _isRefreshing;
+
     public ObservableCollection<CommissionStatus?> StatusFilters { get; } = new()
     {
         null,
@@ -81,8 +84,9 @@ public partial class CommissionsViewModel : BaseViewModel
         try
         {
             IsBusy = true;
+            IsRefreshing = true;
             var commissions = await _repository.GetCommissionsAsync();
-            
+
             Commissions.Clear();
             foreach (var commission in commissions)
             {
@@ -98,6 +102,7 @@ public partial class CommissionsViewModel : BaseViewModel
         finally
         {
             IsBusy = false;
+            IsRefreshing = false;
         }
     }
 
@@ -146,9 +151,22 @@ public partial class CommissionsViewModel : BaseViewModel
 
     private async Task CreateCommission()
     {
+        var newCommission = new Commission
+        {
+            CreatedDate = DateTime.UtcNow,
+            Title = "Новая комиссия",
+            Status = CommissionStatus.Queued,
+            Price = 0,
+            ArtType = ArtType.Other,
+            Priority = 1,
+            IsPaid = false,
+            Tags = new List<CommissionTag>(),
+            Artworks = new List<Artwork>(),
+        };
+
         var parameters = new Dictionary<string, object>
         {
-            ["Commission"] = new Commission { CreatedDate = DateTime.UtcNow }
+            ["Commission"] = newCommission
         };
 
         await Shell.Current.GoToAsync("CommissionDetailPage", parameters);
@@ -157,6 +175,7 @@ public partial class CommissionsViewModel : BaseViewModel
     private async Task Refresh()
     {
         await LoadCommissions();
+        IsRefreshing = false;
     }
 
     public override async Task InitializeAsync()

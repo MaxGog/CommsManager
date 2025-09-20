@@ -10,7 +10,7 @@ public interface IRepository
     Task<List<Commission>> GetCommissionsAsync();
     Task<List<Commission>> GetCommissionsAsync(Expression<Func<Commission, bool>> predicate);
     Task<Commission?> GetCommissionByIdAsync(int id);
-    Task AddCommissionAsync(Commission commission);
+    Task<Commission> AddCommissionAsync(Commission commission);
     Task UpdateCommissionAsync(Commission commission);
     Task DeleteCommissionAsync(int id);
     Task<List<Commission>> GetCommissionsByStatusAsync(CommissionStatus status);

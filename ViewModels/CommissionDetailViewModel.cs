@@ -34,8 +34,6 @@ public partial class CommissionDetailViewModel : BaseViewModel, Interfaces.IQuer
     public bool HasSketch => !string.IsNullOrEmpty(Commission?.SketchPath);
     public bool HasFinalArt => !string.IsNullOrEmpty(Commission?.FinalArtPath);
 
-    public DateTime Today => DateTime.Today;
-
     public int? DaysUntilDeadline => Commission?.Deadline.HasValue == true 
         ? (int?)(Commission.Deadline.Value - DateTime.Today).TotalDays 
         : null;
@@ -44,7 +42,7 @@ public partial class CommissionDetailViewModel : BaseViewModel, Interfaces.IQuer
     {
         get
         {
-            if (!Commission?.Deadline.HasValue == true) return Colors.Gray;
+            if (Commission?.Deadline.HasValue != true) return Colors.Gray;
             
             var daysLeft = (Commission.Deadline.Value - DateTime.Today).TotalDays;
             return daysLeft switch
@@ -98,7 +96,17 @@ public partial class CommissionDetailViewModel : BaseViewModel, Interfaces.IQuer
         if (query.TryGetValue("Commission", out var commissionObj) && commissionObj is Commission commission)
         {
             Commission = commission;
+            
+            Commission.Tags ??= new List<CommissionTag>();
+            Commission.Artworks ??= new List<Artwork>();
+            
             Title = Commission.Id > 0 ? "Редактирование комиссии" : "Новая комиссия";
+            
+            OnPropertyChanged(nameof(IsExistingCommission));
+            OnPropertyChanged(nameof(HasSketch));
+            OnPropertyChanged(nameof(HasFinalArt));
+            OnPropertyChanged(nameof(DaysUntilDeadline));
+            OnPropertyChanged(nameof(DeadlineColor));
         }
     }
 
@@ -133,14 +141,17 @@ public partial class CommissionDetailViewModel : BaseViewModel, Interfaces.IQuer
 
     private void LoadImages()
     {
-        if (!string.IsNullOrEmpty(Commission?.SketchPath))
+        if (Commission != null)
         {
-            SketchImage = ImageSource.FromFile(Commission.SketchPath);
-        }
+            if (!string.IsNullOrEmpty(Commission.SketchPath))
+            {
+                SketchImage = ImageSource.FromFile(Commission.SketchPath);
+            }
 
-        if (!string.IsNullOrEmpty(Commission?.FinalArtPath))
-        {
-            FinalArtImage = ImageSource.FromFile(Commission.FinalArtPath);
+            if (!string.IsNullOrEmpty(Commission.FinalArtPath))
+            {
+                FinalArtImage = ImageSource.FromFile(Commission.FinalArtPath);
+            }
         }
     }
 
@@ -160,7 +171,9 @@ public partial class CommissionDetailViewModel : BaseViewModel, Interfaces.IQuer
 
             if (Commission.Id == 0)
             {
-                await _repository.AddCommissionAsync(Commission);
+                var savedCommission = await _repository.AddCommissionAsync(Commission);
+                Commission = savedCommission;
+                
                 await Shell.Current.DisplayAlert("Успех", "Комиссия создана", "OK");
             }
             else
@@ -234,7 +247,7 @@ public partial class CommissionDetailViewModel : BaseViewModel, Interfaces.IQuer
 
     private async Task AddTag()
     {
-        if (string.IsNullOrWhiteSpace(NewTag)) return;
+        if (string.IsNullOrWhiteSpace(NewTag) || Commission == null) return;
 
         try
         {
@@ -244,6 +257,8 @@ public partial class CommissionDetailViewModel : BaseViewModel, Interfaces.IQuer
                 tag = new Tag { Name = NewTag.Trim() };
                 await _repository.AddTagAsync(tag);
             }
+
+            Commission.Tags ??= new List<CommissionTag>();
 
             if (Commission.Tags.All(t => t.TagId != tag.Id))
             {
@@ -259,7 +274,7 @@ public partial class CommissionDetailViewModel : BaseViewModel, Interfaces.IQuer
 
     private async Task RemoveTag(CommissionTag commissionTag)
     {
-        if (commissionTag != null)
+        if (commissionTag != null && Commission?.Tags != null)
         {
             Commission.Tags.Remove(commissionTag);
         }

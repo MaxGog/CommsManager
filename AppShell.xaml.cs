@@ -1,4 +1,6 @@
-﻿namespace CommsManager;
+﻿using CommsManager.Views;
+
+namespace CommsManager;
 
 public partial class AppShell : Shell
 {

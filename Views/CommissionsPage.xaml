@@ -82,12 +82,14 @@
                         Opacity="0.3" />
             </Border.Shadow>
 
-            <Button ImageSource="add_white.png"
-                    Command="{Binding CreateCommissionCommand}"
-                    BackgroundColor="Transparent"
-                    WidthRequest="56"
-                    HeightRequest="56"
-                    CornerRadius="28" />
+            <Button Text="+"
+                FontSize="24"
+                TextColor="White"
+                Command="{Binding CreateCommissionCommand}"
+                BackgroundColor="Transparent"
+                WidthRequest="56"
+                HeightRequest="56"
+                CornerRadius="28" />
         </Border>
 
     </Grid>
