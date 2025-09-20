@@ -159,15 +159,28 @@ public partial class CommissionDetailViewModel : BaseViewModel, Interfaces.IQuer
     {
         if (IsBusy) return;
 
+        if (string.IsNullOrWhiteSpace(Commission.Title))
+        {
+            await Shell.Current.DisplayAlert("Ошибка", "Название комиссии обязательно", "OK");
+            return;
+        }
+
+        if (SelectedCustomer == null)
+        {
+            await Shell.Current.DisplayAlert("Ошибка", "Выберите заказчика", "OK");
+            return;
+        }
+
         try
         {
             IsBusy = true;
 
-            if (SelectedCustomer != null)
-            {
-                Commission.CustomerId = SelectedCustomer.Id;
-                Commission.Customer = SelectedCustomer;
-            }
+            Commission.CustomerId = SelectedCustomer.Id;
+            Commission.Customer = SelectedCustomer;
+            
+            Commission.Title ??= "Новая комиссия";
+            Commission.Description ??= string.Empty;
+            Commission.Notes ??= string.Empty;
 
             if (Commission.Id == 0)
             {

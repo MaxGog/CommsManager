@@ -5,6 +5,19 @@ namespace CommsManager.Models;
 
 public class Commission
 {
+    public Commission()
+    {
+        CreatedDate = DateTime.UtcNow;
+        Title = "Новая комиссия";
+        Status = CommissionStatus.Queued;
+        Price = 0;
+        ArtType = ArtType.Other;
+        Priority = 1;
+        IsPaid = false;
+        Tags = new List<CommissionTag>();
+        Artworks = new List<Artwork>();
+    }
+
     [Key]
     public int Id { get; set; }
 

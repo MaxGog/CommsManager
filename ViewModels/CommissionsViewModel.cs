@@ -151,18 +151,7 @@ public partial class CommissionsViewModel : BaseViewModel
 
     private async Task CreateCommission()
     {
-        var newCommission = new Commission
-        {
-            CreatedDate = DateTime.UtcNow,
-            Title = "Новая комиссия",
-            Status = CommissionStatus.Queued,
-            Price = 0,
-            ArtType = ArtType.Other,
-            Priority = 1,
-            IsPaid = false,
-            Tags = new List<CommissionTag>(),
-            Artworks = new List<Artwork>(),
-        };
+        var newCommission = new Commission();
 
         var parameters = new Dictionary<string, object>
         {

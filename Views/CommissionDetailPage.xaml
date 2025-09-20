@@ -18,7 +18,7 @@
                     
                     <Entry Grid.Row="0" Grid.Column="0"
                            Text="{Binding Commission.Title}"
-                           Placeholder="Название комиссии"
+                           Placeholder="Название комиссии*"
                            Style="{StaticResource FluentEntryStyle}"
                            FontSize="18"
                            FontAttributes="Bold" />
@@ -32,7 +32,7 @@
                     
                     <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                           ColumnDefinitions="Auto,*" ColumnSpacing="8">
-                        <Label Text="Заказчик:"
+                        <Label Text="Заказчик:*"
                                Style="{StaticResource BodyMediumLabelStyle}"
                                VerticalOptions="Center" />
                         <Picker Grid.Column="1"

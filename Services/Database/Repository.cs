@@ -56,24 +56,22 @@ public class Repository : IRepository, IDisposable
 
     public async Task<Commission> AddCommissionAsync(Commission commission)
     {
+        commission.Title ??= "Новая комиссия";
+        commission.Description ??= string.Empty;
+        commission.Notes ??= string.Empty;
+        commission.CreatedDate = commission.CreatedDate == default ? DateTime.UtcNow : commission.CreatedDate;
+        
         await _context.Commissions.AddAsync(commission);
         await _context.SaveChangesAsync();
         
-        await _context.Entry(commission)
-            .Reference(c => c.Customer)
-            .LoadAsync();
+        var savedCommission = await _context.Commissions
+            .Include(c => c.Customer)
+            .Include(c => c.Tags)
+                .ThenInclude(ct => ct.Tag)
+            .Include(c => c.Artworks)
+            .FirstOrDefaultAsync(c => c.Id == commission.Id);
         
-        await _context.Entry(commission)
-            .Collection(c => c.Tags)
-            .Query()
-            .Include(ct => ct.Tag)
-            .LoadAsync();
-        
-        await _context.Entry(commission)
-            .Collection(c => c.Artworks)
-            .LoadAsync();
-        
-        return commission;
+        return savedCommission ?? commission;
     }
 
     public async Task UpdateCommissionAsync(Commission commission)
