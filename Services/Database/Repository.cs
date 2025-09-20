@@ -16,6 +16,7 @@ public class Repository : IRepository, IDisposable
     public Repository(DatabaseContext context)
     {
         _context = context;
+        _context.Database.EnsureCreated();
     }
 
     #region Commission Methods
