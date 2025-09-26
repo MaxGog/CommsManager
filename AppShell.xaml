@@ -6,9 +6,17 @@
     xmlns:views="clr-namespace:CommsManager.Views"
     Title="CommsManager">
 
-    <ShellContent
-        Title="Home"
+    <TabBar>
+        <ShellContent
+        Title="Commissions"
         ContentTemplate="{DataTemplate views:CommissionsPage}"
-        Route="MainPage" />
+        Route="CommissionsPage"/>
+    
+        <ShellContent
+            Title="Customers"
+            ContentTemplate="{DataTemplate views:CustomersPage}"
+            Route="CustomersPage"/>
+        
+    </TabBar>
 
 </Shell>

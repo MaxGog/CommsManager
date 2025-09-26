@@ -52,11 +52,15 @@ public static class MauiProgram
     {
         services.AddTransient<CommissionsViewModel>();
         services.AddTransient<CommissionDetailViewModel>();
+        services.AddTransient<CustomersViewModel>();
+        services.AddTransient<CustomerEditViewModel>();
     }
 
     private static void RegisterPages(IServiceCollection services)
     {
         services.AddTransient<CommissionsPage>();
         services.AddTransient<CommissionDetailPage>();
+        services.AddTransient<CustomersPage>();
+        services.AddTransient<CustomerEditPage>();
     }
 }

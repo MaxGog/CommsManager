@@ -19,5 +19,7 @@ public partial class App : Application
 	{
 		Routing.RegisterRoute("CommissionDetailPage", typeof(CommissionDetailPage));
 		Routing.RegisterRoute("CommissionsPage", typeof(CommissionsPage));
+		Routing.RegisterRoute("CustomerEditPage", typeof(CustomerEditPage));
+		Routing.RegisterRoute("CustomersPage", typeof(CustomersPage));
 	}
 }

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="CommsManager.Views.CustomersPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:CommsManager.ViewModels"
+             xmlns:models="clr-namespace:CommsManager.Models"
+             Title="Заказчики"
+             x:DataType="viewmodels:CustomersViewModel">
+    
+    <Grid RowDefinitions="Auto,*,Auto" Padding="10">
+        <SearchBar Grid.Row="0"
+                   Placeholder="Поиск заказчиков..."
+                   Text="{Binding SearchText}"
+                   SearchCommand="{Binding SearchCustomersCommand}"
+                   Margin="0,0,0,10"/>
+        
+        <RefreshView Grid.Row="1"
+                     IsRefreshing="{Binding IsBusy}"
+                     Command="{Binding LoadCustomersCommand}">
+            <CollectionView ItemsSource="{Binding Customers}"
+                            SelectionMode="Single"
+                            SelectedItem="{Binding SelectedCustomer}">
+                
+                <CollectionView.EmptyView>
+                    <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Padding="20">
+                        <Label Text="Заказчики не найдены" 
+                               HorizontalOptions="Center"
+                               FontSize="16"/>
+                        <Label Text="Нажмите + чтобы добавить первого заказчика"
+                               HorizontalOptions="Center"
+                               FontSize="14"
+                               TextColor="Gray"/>
+                    </StackLayout>
+                </CollectionView.EmptyView>
+                
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Customer">
+                        <Grid Padding="15,10" ColumnDefinitions="Auto,*,Auto">
+                            <Frame Grid.Column="0" 
+                                   BackgroundColor="{AppThemeBinding Light=#E0E0E0, Dark=#404040}"
+                                   CornerRadius="20"
+                                   HeightRequest="40"
+                                   WidthRequest="40"
+                                   Padding="0"
+                                   Margin="0,0,10,0">
+                                <Label Text="{Binding Name, Converter={StaticResource FirstLetterConverter}}"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"/>
+                            </Frame>
+
+                            <StackLayout Grid.Column="1" VerticalOptions="Center">
+                                <Label Text="{Binding Name}" FontSize="16" FontAttributes="Bold"/>
+                                
+                                <StackLayout Orientation="Horizontal" Spacing="10">
+                                    <Label Text="{Binding Email}" FontSize="12" TextColor="Gray"
+                                           IsVisible="{Binding Email, Converter={StaticResource StringNotEmptyConverter}}"/>
+                                    <Label Text="{Binding Phone}" FontSize="12" TextColor="Gray"
+                                           IsVisible="{Binding Phone, Converter={StaticResource StringNotEmptyConverter}}"/>
+                                </StackLayout>
+                                
+                                <Label Text="{Binding Commissions.Count, StringFormat='{0} комиссий'}" 
+                                       FontSize="12" TextColor="Gray"/>
+                            </StackLayout>
+                            
+                            <StackLayout Grid.Column="2" Orientation="Horizontal" Spacing="5">
+                                <Button Text="✏️" 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:CustomersViewModel}}, Path=EditCustomerCommand}"
+                                        CommandParameter="{Binding .}"
+                                        BackgroundColor="Transparent"
+                                        FontSize="12"
+                                        HeightRequest="30"
+                                        WidthRequest="30"/>
+                                
+                                <Button Text="📋"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:CustomersViewModel}}, Path=ViewCustomerCommissionsCommand}"
+                                        CommandParameter="{Binding .}"
+                                        BackgroundColor="Transparent"
+                                        FontSize="12"
+                                        HeightRequest="30"
+                                        WidthRequest="30"/>
+                            </StackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+        
+        <Button Grid.Row="2"
+                Text="+"
+                Command="{Binding AddCustomerCommand}"
+                BackgroundColor="{AppThemeBinding Light=#007ACC, Dark=#0099FF}"
+                TextColor="White"
+                FontSize="20"
+                FontAttributes="Bold"
+                HeightRequest="60"
+                WidthRequest="60"
+                CornerRadius="30"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                Margin="0,10,0,0"/>
+    </Grid>
+</ContentPage>
