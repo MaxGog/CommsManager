@@ -1,0 +1,78 @@
+﻿@page
+@model CommsManager.Pages.DashboardModel
+@{
+    ViewData["Title"] = "Панель управления";
+}
+
+<div class="container mt-4">
+    <h1>Панель управления</h1>
+
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Клиенты</h5>
+                    <p class="card-text display-4">@Model.TotalClients</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Услуги</h5>
+                    <p class="card-text display-4">@Model.TotalServices</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-white bg-warning mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Активные заказы</h5>
+                    <p class="card-text display-4">@Model.ActiveOrders</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Прибыль</h5>
+                    <p class="card-text display-4">@Model.Profit.ToString("C")</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Финансы</h5>
+                </div>
+                <div class="card-body">
+                    <p>Доходы: <strong>@Model.TotalIncome.ToString("C")</strong></p>
+                    <p>Расходы: <strong>@Model.TotalExpenses.ToString("C")</strong></p>
+                    <p>Прибыль: <strong
+                            class="@(Model.Profit >= 0 ? "text-success" : "text-danger")">@Model.Profit.ToString("C")</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Быстрые действия</h5>
+                </div>
+                <div class="card-body">
+                    <a href="/Services/Create" class="btn btn-primary mb-2">Добавить услугу</a>
+                    <a href="/Clients/Create" class="btn btn-success mb-2">Добавить клиента</a>
+                    <a href="/Orders/Create" class="btn btn-warning mb-2">Создать заказ</a>
+                    <a href="/Incomes/Create" class="btn btn-info mb-2">Добавить доход</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
