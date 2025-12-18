@@ -1,95 +1,84 @@
-bin/
-obj/
-[Tt]emp/
-*.user
-*.userprefs
-*.[Cc]ache
-*.vs/
-.vs/
+## .NET ##
 *.swp
-*~
+*.*~
+*.db
+*.sqlite
+*.db-journal
+*.DS_Store
+Thumbs.db
 
-[Bb]uild/
-[Bb]uildOutput/
-[Pp]ublish/
-*.publishproj
-*.pubxml
+## User specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
 
+## Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+## Visual Studio
+.vs/
+.vscode/
+*.aps
+*.ncb
+*.opensdf
+*.sdf
+*.cachefile
+*.VC.db
+*.VC.VC.opendb
+
+## MAUI specific
+*.ipa
+*.apk
+*.aab
+*.dsym.zip
+*.appxbundle
+*.msixbundle
+BundleArtifacts/
+SigningArchives/
+
+## Rider
+.idea/
+*.sln.iml
+
+## macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+## Windows
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+## NuGet
 packages/
-*.nupkg
 .nuget/
 nuget.exe
 
-.idea/
-*.sln.iml
-*.suo
-*.sln.docstates
-
-.vscode/
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-*.code-workspace
-
-appsettings.Development.json
-appsettings.Local.json
-appsettings.Private.json
-
-[Dd]ebug/
-[Rr]elease/
-*.log
-*.pid
-*.dump
-
-*.mdf
-*.ldf
-*.sdf
-
-TestResults/
-*.trx
+## Coverage
+coverage.json
+coverage.cobertura.xml
 *.coverage
 *.coveragexml
 
-[Aa]zure/
+## SQL Server
+*.mdf
+*.ldf
+*.ndf
 
-.dockerignore
-docker-compose.*.yml
-docker-compose.*.yaml
-.env
-.env.local
-
-/Migrations/*.Designer.cs
-/Migrations/*.cs
-!Migrations/*Snapshot.cs
-
-*.pfx
-*.cer
-*.crt
-*.key
-
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-wwwroot/lib/
-bower_components/
-
-*.backup
-*.bak
-
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-[Tt]humbs.db
-
-Desktop.ini
-$RECYCLE.BIN/
-*.cab
-*.msi
-*.msm
-*.msp
+## Temp
+tmp/
+temp/
