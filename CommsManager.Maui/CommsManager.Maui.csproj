@@ -23,7 +23,7 @@
     <ApplicationTitle>CommsManager</ApplicationTitle>
 
     <!-- App Identifier -->
-    <ApplicationId>com.companyname.commsmanager</ApplicationId>
+    <ApplicationId>com.maxgog.commsmanager</ApplicationId>
 
     <!-- Versions -->
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
