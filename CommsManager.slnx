@@ -1,3 +1,7 @@
 <Solution>
-  <Project Path="CommsManager.csproj" />
+  <Folder Name="/CommsManager/">
+    <Project Path="CommsManager.Shared/CommsManager.Shared.csproj" />
+    <Project Path="CommsManager.Web/CommsManager.Web.csproj" />
+    <Project Path="CommsManager/CommsManager.csproj" />
+  </Folder>
 </Solution>
