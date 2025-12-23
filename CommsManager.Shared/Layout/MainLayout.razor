@@ -1,13 +1,41 @@
-﻿@inherits LayoutComponentBase
+﻿@using CommsManager.Shared.Services
+@inherits LayoutComponentBase
 
 <div class="page">
     <div class="sidebar">
-        <NavMenu />
+        <div class="sidebar-header">
+            <h3>CommsManager</h3>
+            <p class="text-muted small">Управление заказами</p>
+        </div>
+
+        <nav class="sidebar-nav">
+            <div class="nav-item">
+                <NavLink class="nav-link" href="/orders">
+                    <i class="bi bi-clipboard-check"></i> Заказы
+                    <span class="badge bg-primary ms-2">@_activeOrdersCount</span>
+                </NavLink>
+            </div>
+            <div class="nav-item">
+                <NavLink class="nav-link" href="/portfolio">
+                    <i class="bi bi-images"></i> Портфолио
+                </NavLink>
+            </div>
+            <div class="nav-item">
+                <NavLink class="nav-link" href="/profile">
+                    <i class="bi bi-person-circle"></i> Мой профиль
+                </NavLink>
+            </div>
+            <div class="nav-item mt-3">
+                <div class="nav-link text-muted small">
+                    <i class="bi bi-device-phone"></i> @_formFactor
+                </div>
+            </div>
+        </nav>
     </div>
 
     <main>
         <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+            <a href="https://learn.microsoft.com/aspnet/" target="_blank">О приложении</a>
         </div>
 
         <article class="content px-4">
@@ -16,8 +44,16 @@
     </main>
 </div>
 
-<div id="blazor-error-ui" data-nosnippet>
-    An unhandled error has occurred.
-    <a href="." class="reload">Reload</a>
-    <span class="dismiss">🗙</span>
-</div>
+@code {
+    private string _formFactor = "";
+    private int _activeOrdersCount = 0;
+
+    [Inject] private IFormFactor FormFactorService { get; set; }
+    [Inject] private MockDataService DataService { get; set; }
+
+    protected override void OnInitialized()
+    {
+        _formFactor = $"{FormFactorService.GetFormFactor()} ({FormFactorService.GetPlatform()})";
+        _activeOrdersCount = DataService.GetActiveOrdersCount();
+    }
+}

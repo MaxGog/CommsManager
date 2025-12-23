@@ -8,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddSingleton<MockDataService>();
+
 // Add device-specific services used by the CommsManager.Shared project
 builder.Services.AddSingleton<IFormFactor, FormFactor>();
 

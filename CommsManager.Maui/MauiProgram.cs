@@ -21,6 +21,8 @@ public static class MauiProgram
 
         builder.Services.AddMauiBlazorWebView();
 
+        builder.Services.AddSingleton<MockDataService>();
+
 #if DEBUG
         builder.Services.AddBlazorWebViewDeveloperTools();
         builder.Logging.AddDebug();

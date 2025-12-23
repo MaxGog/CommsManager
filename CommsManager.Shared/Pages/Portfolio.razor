@@ -1,0 +1,129 @@
+@page "/portfolio"
+@using CommsManager.Shared.Models
+@using CommsManager.Shared.Services
+@inject MockDataService DataService
+
+<PageTitle>Портфолио - CommsManager</PageTitle>
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Мое портфолио</h1>
+        <button class="btn btn-success" @onclick="ShowAddPortfolioModal">
+            <i class="bi bi-plus-circle"></i> Добавить работу
+        </button>
+    </div>
+
+    @if (!_portfolio.Any())
+    {
+        <div class="alert alert-info">
+            <h4>Портфолио пустое</h4>
+            <p>Добавьте ваши работы, чтобы показывать их клиентам</p>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var item in _portfolio)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="@item.ImageUrl" class="card-img-top" style="height: 200px; object-fit: cover;"
+                            alt="@item.Title">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Title</h5>
+                            <p class="card-text">@item.Description</p>
+                            <div class="mb-2">
+                                @foreach (var tag in item.Tags)
+                                {
+                                    <span class="badge bg-secondary me-1">@tag</span>
+                                }
+                            </div>
+                            <p class="text-success fw-bold">@item.Price.ToString("N0") ₽</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+<!-- Модальное окно добавления работы -->
+@if (_showPortfolioModal)
+{
+    <div class="modal show d-block" tabindex="-1" style="background: rgba(0,0,0,0.5)">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Добавить работу в портфолио</h5>
+                    <button type="button" class="btn-close" @onclick="ClosePortfolioModal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Название работы</label>
+                        <input @bind="@_newPortfolioItem.Title" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Описание</label>
+                        <textarea @bind="@_newPortfolioItem.Description" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">URL изображения</label>
+                        <input @bind="@_newPortfolioItem.ImageUrl" class="form-control"
+                            placeholder="https://example.com/image.jpg" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Цена (₽)</label>
+                        <input type="number" @bind="@_newPortfolioItem.Price" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Теги (через запятую)</label>
+                        <input @bind="@_tagsInput" class="form-control" placeholder="акварель, портрет, животные" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @onclick="ClosePortfolioModal">Отмена</button>
+                    <button type="button" class="btn btn-primary" @onclick="AddPortfolioItem">Добавить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private List<PortfolioItem> _portfolio = new();
+    private bool _showPortfolioModal = false;
+    private PortfolioItem _newPortfolioItem = new();
+    private string _tagsInput = "";
+
+    protected override void OnInitialized()
+    {
+        _portfolio = DataService.GetPortfolio();
+    }
+
+    private void ShowAddPortfolioModal()
+    {
+        _newPortfolioItem = new PortfolioItem();
+        _tagsInput = "";
+        _showPortfolioModal = true;
+    }
+
+    private void AddPortfolioItem()
+    {
+        if (!string.IsNullOrWhiteSpace(_tagsInput))
+        {
+            _newPortfolioItem.Tags = _tagsInput.Split(',')
+            .Select(t => t.Trim())
+            .Where(t => !string.IsNullOrEmpty(t))
+            .ToList();
+        }
+
+        DataService.AddPortfolioItem(_newPortfolioItem);
+        _portfolio = DataService.GetPortfolio();
+        ClosePortfolioModal();
+    }
+
+    private void ClosePortfolioModal()
+    {
+        _showPortfolioModal = false;
+    }
+}

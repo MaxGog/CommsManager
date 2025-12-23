@@ -1,0 +1,101 @@
+@page "/profile"
+@using CommsManager.Shared.Services
+@inject IFormFactor FormFactor
+
+<PageTitle>Мой профиль - CommsManager</PageTitle>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <img src="https://via.placeholder.com/150" class="rounded-circle mb-3" alt="Аватар"
+                        style="width: 150px; height: 150px; object-fit: cover;">
+                    <h4>Художник / Крафтер</h4>
+                    <p class="text-muted">Создаю уникальные работы на заказ</p>
+
+                    <div class="mt-4">
+                        <h6>QR-код вашего профиля</h6>
+                        <div class="bg-light p-3 rounded d-inline-block">
+                            <div style="width: 150px; height: 150px; background: #333;"
+                                class="d-flex align-items-center justify-content-center text-white">
+                                QR Code
+                            </div>
+                        </div>
+                        <p class="small text-muted mt-2">
+                            Отсканируйте, чтобы перейти к профилю
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h6>Информация о платформе</h6>
+                    <ul class="list-unstyled">
+                        <li><strong>Устройство:</strong> @FormFactor.GetFormFactor()</li>
+                        <li><strong>Платформа:</strong> @FormFactor.GetPlatform()</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Мои ссылки (LinkTree)</h5>
+
+                    <div class="list-group">
+                        <a href="/orders" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">📋 Мои заказы</h6>
+                            </div>
+                            <p class="mb-1">Управление текущими и завершенными заказами</p>
+                        </a>
+
+                        <a href="/portfolio" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">🖼️ Портфолио</h6>
+                            </div>
+                            <p class="mb-1">Примеры моих работ</p>
+                        </a>
+
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">📱 Instagram</h6>
+                            </div>
+                            <p class="mb-1">@("artist_username")</p>
+                        </a>
+
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">✉️ Email</h6>
+                            </div>
+                            <p class="mb-1">artist@example.com</p>
+                        </a>
+
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">💬 Telegram</h6>
+                            </div>
+                            <p class="mb-1">@("t.me/artist")</p>
+                        </a>
+                    </div>
+
+                    <div class="mt-4">
+                        <h6>Настройки профиля</h6>
+                        <div class="mb-3">
+                            <label class="form-label">Имя для отображения</label>
+                            <input type="text" class="form-control" value="Художник / Крафтер" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Описание</label>
+                            <textarea class="form-control" rows="3">Создаю уникальные работы на заказ</textarea>
+                        </div>
+                        <button class="btn btn-primary">Сохранить изменения</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
