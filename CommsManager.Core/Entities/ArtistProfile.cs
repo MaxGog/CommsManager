@@ -1,20 +1,22 @@
-using System.Runtime.CompilerServices;
 using CommsManager.Core.Enums;
 using CommsManager.Core.Models;
 
 namespace CommsManager.Core.Entities;
 
-public class Customer : BaseEntity
+public class ArtistProfile : BaseEntity
 {
     public string Name { get; private set; }
-    public DateTime CreatedDate { get; private set; }
-    public bool IsActive { get; private set; }
     public string? Description { get; private set; }
-    public string? Communication { get; private set; }
+    public DateTime CreatedDate { get; private set; }
+
+    public byte[]? ArtistPicture { get; private set; }
+    public void SetArtistPicture(byte[] bytes) => ArtistPicture = bytes;
+    public byte[]? ArtistBanner { get; private set; }
+    public void SetArtistBanner(byte[] bytes) => ArtistBanner = bytes;
 
     private readonly List<Phones> _phones = [];
     public List<Phones> Phones => _phones;
-    public void AddPhone(string phone, string? description, string? type) 
+    public void AddPhone(string phone, string? description, string? type)
         => _phones.Add(new Phones
         {
             NumberPhone = phone,
@@ -43,22 +45,13 @@ public class Customer : BaseEntity
             IsActive = visible
         });
 
-    private readonly List<Order> _orders = [];
-    public IReadOnlyCollection<Order> Orders => _orders.AsReadOnly();
+    private readonly List<Commission> _commissions = [];
+    public List<Commission> Commissions => _commissions;
 
-    public byte[]? CustomerPicture { get; private set; }
-    public void SetCustomerPicture(byte[] bytes) => CustomerPicture = bytes;
-
-    public Customer(string name)
+    public ArtistProfile(string name)
     {
         Id = Guid.NewGuid();
         Name = name;
         CreatedDate = DateTime.UtcNow;
-        IsActive = true;
-    }
-
-    public void Deactivate()
-    {
-        IsActive = false;
     }
 }

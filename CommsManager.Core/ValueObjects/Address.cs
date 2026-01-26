@@ -1,21 +1,12 @@
 namespace CommsManager.Core.ValueObjects;
 
-public sealed class Address : ValueObject
+public sealed class Address(string street, string city, string state, string country, string zipCode) : ValueObject
 {
-    public string Street { get; }
-    public string City { get; }
-    public string State { get; }
-    public string Country { get; }
-    public string ZipCode { get; }
-
-    public Address(string street, string city, string state, string country, string zipCode)
-    {
-        Street = street;
-        City = city;
-        State = state;
-        Country = country;
-        ZipCode = zipCode;
-    }
+    public string Street { get; } = street;
+    public string City { get; } = city;
+    public string State { get; } = state;
+    public string Country { get; } = country;
+    public string ZipCode { get; } = zipCode;
 
     protected override IEnumerable<object> GetEqualityComponents()
     {

@@ -11,36 +11,3 @@ public enum OrderStatus
     Cancelled = 6,      // Отменен
     OnHold = 7         // На паузе
 }
-
-public enum PaymentStatus
-{
-    Pending = 0,
-    PartiallyPaid = 1,
-    Paid = 2,
-    Overdue = 3,
-    Refunded = 4
-}
-
-public enum SocialPlatform
-{
-    Instagram,
-    Facebook,
-    TikTok,
-    Twitter,
-    YouTube,
-    Pinterest,
-    LinkedIn,
-    VKontakte,
-    Telegram,
-    WhatsApp,
-    Other
-}
-
-public enum AttachmentType
-{
-    Image,
-    Document,
-    Video,
-    Audio,
-    Other
-}
