@@ -1,3 +1,5 @@
+using CommsManager.Core.Entities;
+
 namespace CommsManager.Core.Exceptions;
 
 public abstract class DomainException : Exception
@@ -12,14 +14,9 @@ public abstract class DomainException : Exception
     }
 }
 
-public sealed class OrderNotFoundException : DomainException
+public sealed class OrderNotFoundException(Guid orderId) : DomainException($"Заказ с идентификатором {orderId} не найден")
 {
-    public Guid OrderId { get; }
-
-    public OrderNotFoundException(Guid orderId) : base($"Заказ с идентификатором {OrderID} не найден")
-    {
-        OrderId = orderId;
-    }
+    public Guid OrderId { get; } = orderId;
 }
 
 public sealed class InvalidOrderStateException : DomainException

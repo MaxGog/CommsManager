@@ -40,4 +40,32 @@ public sealed class Money : ValueObject
     }
 
     public override string ToString() => $"{Amount:N2} {Currency}";
+
+    public static Money FromString(string input)
+    {
+        if (string.IsNullOrWhiteSpace(input))
+            throw new ArgumentException("Входная строка не может быть пустой или null", nameof(input));
+
+        var parts = input.Trim().Split([' '], StringSplitOptions.RemoveEmptyEntries);
+
+        if (parts.Length != 2)
+            throw new ArgumentException("Строка должна содержать сумму и валюту, разделённые пробелом", nameof(input));
+
+        var amountStr = parts[0];
+        var currency = parts[1];
+
+        if (!decimal.TryParse(amountStr, System.Globalization.NumberStyles.Number,
+            System.Globalization.CultureInfo.InvariantCulture, out decimal amount))
+        {
+            throw new ArgumentException($"Не удалось преобразовать '{amountStr}' в число", nameof(input));
+        }
+
+        if (amount < 0)
+            throw new ArgumentException("Сумма не может быть отрицательной", nameof(input));
+
+        if (string.IsNullOrWhiteSpace(currency))
+            throw new ArgumentException("Валюта не может быть пустой", nameof(input));
+
+        return new Money(amount, currency);
+    }
 }

@@ -1,3 +1,6 @@
+using CommsManager.Core.Entities;
+using CommsManager.Core.Enums;
+
 namespace CommsManager.Core.Events;
 
 public sealed class OrderCreatedEvent : DomainEvent
@@ -21,10 +24,9 @@ public sealed class OrderStatusChangedEvent : DomainEvent
     public Guid OrderId { get; }
     public OrderStatus NewStatus { get; }
 
-    public OrderStatusChangedEvent(Guid orderId, OrderStatus newStatus, DateTime occurredOn)
+    public OrderStatusChangedEvent(Guid orderId, OrderStatus newStatus)
     {
         OrderId = orderId;
         NewStatus = newStatus;
-        OccurredOn = occurredOn;
     }
 }

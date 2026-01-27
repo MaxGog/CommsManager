@@ -1,5 +1,4 @@
 using CommsManager.Core.Enums;
-using CommsManager.Core.Events;
 using CommsManager.Core.ValueObjects;
 using CommsManager.Core.Models;
 
