@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CommsManager.Maui.Views.CustomerDetailPage">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="20">
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Имя *"
+                    FontSize="14"
+                    TextColor="Black"/>
+                <Entry Text="{Binding Name}"
+                    Placeholder="Введите имя клиента"
+                    FontSize="16"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Описание"
+                    FontSize="14"
+                    TextColor="Black"/>
+                <Editor Text="{Binding Description}"
+                    AutoSize="TextChanges"
+                    Placeholder="Описание клиента..."
+                    HeightRequest="80"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="10">
+                <Label Text="Контактная информация"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    TextColor="Black"/>
+
+                <Frame CornerRadius="10"
+                    Padding="10"
+                    BackgroundColor="#F5F5F5">
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Телефоны"
+                            FontSize="14"/>
+                        <CollectionView ItemsSource="{Binding Phones}"
+                            HeightRequest="150">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <Entry Text="{Binding NumberPhone}"
+                                            Placeholder="Телефон"
+                                            Grid.Column="0"/>
+                                        <ImageButton Source="delete.png"
+                                            Grid.Column="1"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:CustomerDetailViewModel}}, 
+                                                            Path=RemovePhoneCommand}"
+                                            CommandParameter="{Binding .}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                        <Button Text="Добавить телефон"
+                            Command="{Binding AddPhoneCommand}"
+                            BackgroundColor="LightGray"
+                            TextColor="Black"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+            </VerticalStackLayout>
+
+            <Grid ColumnDefinitions="*,*"
+                ColumnSpacing="10">
+                <Button Text="Сохранить"
+                    Grid.Column="0"
+                    Command="{Binding SaveCommand}"
+                    BackgroundColor="#2b0b98"
+                    TextColor="White"/>
+                <Button Text="Отмена"
+                    Grid.Column="1"
+                    Command="{Binding CancelCommand}"
+                    BackgroundColor="LightGray"
+                    TextColor="Black"/>
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

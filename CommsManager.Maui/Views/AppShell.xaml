@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:CommsManager.Maui.Views"
+       x:Class="CommsManager.Maui.Views.AppShell">
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BaseStyle"
+                    TargetType="Element">
+                <Setter Property="Shell.BackgroundColor"
+                        Value="#2b0b98"/>
+                <Setter Property="Shell.ForegroundColor"
+                        Value="White"/>
+                <Setter Property="Shell.TitleColor"
+                        Value="White"/>
+                <Setter Property="Shell.DisabledColor"
+                        Value="#B4FFFFFF"/>
+                <Setter Property="Shell.UnselectedColor"
+                        Value="#95FFFFFF"/>
+                <Setter Property="Shell.TabBarBackgroundColor"
+                        Value="#2b0b98"/>
+                <Setter Property="Shell.TabBarForegroundColor"
+                        Value="White"/>
+                <Setter Property="Shell.TabBarUnselectedColor"
+                        Value="#95FFFFFF"/>
+                <Setter Property="Shell.TabBarTitleColor"
+                        Value="White"/>
+                <Setter Property="Shell.NavBarHasShadow"
+                        Value="False"/>
+            </Style>
+            <Style TargetType="TabBar"
+                    BasedOn="{StaticResource BaseStyle}"/>
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <TabBar>
+        <Tab Title="Клиенты"
+                Icon="customers.png">
+            <ShellContent
+                Title="Клиенты"
+                ContentTemplate="{DataTemplate views:CustomersPage}"
+                Route="Customers"/>
+        </Tab>
+
+        <Tab Title="Заказы"
+                Icon="orders.png">
+            <ShellContent
+                Title="Заказы"
+                ContentTemplate="{DataTemplate views:OrdersPage}"
+                Route="Orders"/>
+        </Tab>
+
+        <Tab Title="Художники"
+                Icon="artists.png">
+            <ShellContent
+                Title="Художники"
+                ContentTemplate="{DataTemplate views:ArtistsPage}"
+                Route="Artists"/>
+        </Tab>
+
+        <Tab Title="Профиль"
+                Icon="profile.png">
+            <ShellContent
+                Title="Профиль"
+                ContentTemplate="{DataTemplate views:ProfilePage}"
+                Route="Profile"/>
+        </Tab>
+    </TabBar>
+</Shell>

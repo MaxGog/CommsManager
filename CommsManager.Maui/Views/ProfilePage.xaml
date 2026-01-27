@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CommsManager.Maui.Views.ProfilePage"
+             Title="Профиль">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20"
+                Spacing="20">
+
+            <Label Text="Профиль приложения"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
+
+            <Frame CornerRadius="10"
+                    Padding="15"
+                    BackgroundColor="#F0F8FF">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="CommsManager"
+                           FontSize="18"
+                           FontAttributes="Bold"/>
+                    <Label Text="Версия 1.0.0"/>
+                    <Label Text="Приложение для управления заказами художников"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame CornerRadius="10"
+                    Padding="15"
+                    BackgroundColor="#F5F5F5">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Статистика"
+                           FontSize="16"
+                           FontAttributes="Bold"/>
+
+                    <Grid ColumnDefinitions="*,*"
+                            RowDefinitions="Auto,Auto,Auto"
+                          ColumnSpacing="10"
+                            RowSpacing="10">
+
+                        <Frame Grid.Row="0"
+                                Grid.Column="0"
+                               CornerRadius="5"
+                                Padding="10"
+                               BackgroundColor="#E8F5E9">
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="Клиенты"
+                                        FontSize="12"/>
+                                <Label Text="{Binding CustomerCount}"
+                                       FontSize="20"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center"/>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <Frame Grid.Row="0"
+                                Grid.Column="1"
+                               CornerRadius="5"
+                                Padding="10"
+                               BackgroundColor="#E3F2FD">
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="Заказы"
+                                        FontSize="12"/>
+                                <Label Text="{Binding OrderCount}"
+                                       FontSize="20"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center"/>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <Frame Grid.Row="1"
+                                Grid.Column="0"
+                               CornerRadius="5"
+                                Padding="10"
+                               BackgroundColor="#FFF3E0">
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="Художники"
+                                        FontSize="12"/>
+                                <Label Text="{Binding ArtistCount}"
+                                       FontSize="20"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center"/>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <Frame Grid.Row="1"
+                                Grid.Column="1"
+                               CornerRadius="5"
+                                Padding="10"
+                               BackgroundColor="#FCE4EC">
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="Выручка"
+                                        FontSize="12"/>
+                                <Label Text="{Binding TotalRevenue, StringFormat='{0:C}'}"
+                                       FontSize="20"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center"/>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <VerticalStackLayout Spacing="10">
+                <Label Text="Действия"
+                       FontSize="16"
+                       FontAttributes="Bold"/>
+
+                <Button Text="Экспорт данных"
+                        BackgroundColor="#4CAF50"
+                        TextColor="White"
+                        CornerRadius="5"
+                        HeightRequest="45"/>
+
+                <Button Text="Импорт данных"
+                        BackgroundColor="#2196F3"
+                        TextColor="White"
+                        CornerRadius="5"
+                        HeightRequest="45"/>
+
+                <Button Text="Синхронизировать"
+                        BackgroundColor="#FF9800"
+                        TextColor="White"
+                        CornerRadius="5"
+                        HeightRequest="45"/>
+
+                <Button Text="Настройки"
+                        BackgroundColor="#9C27B0"
+                        TextColor="White"
+                        CornerRadius="5"
+                        HeightRequest="45"/>
+
+                <Button Text="Очистить кеш"
+                        BackgroundColor="#F44336"
+                        TextColor="White"
+                        CornerRadius="5"
+                        HeightRequest="45"/>
+            </VerticalStackLayout>
+
+            <Frame CornerRadius="10"
+                    Padding="15"
+                    BackgroundColor="#FFFDE7">
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="Разработано с ❤️"
+                           FontSize="14"
+                           HorizontalOptions="Center"/>
+                    <Label Text="CommsManager Team"
+                           FontSize="12"
+                           TextColor="Gray"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
