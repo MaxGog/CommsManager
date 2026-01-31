@@ -1,0 +1,9 @@
+namespace CommsManager.Maui.Interfaces;
+
+public interface IDialogService
+{
+    Task ShowAlertAsync(string title, string message, string cancel = "OK");
+    Task<bool> ShowConfirmationAsync(string title, string message, string accept = "Да", string cancel = "Нет");
+    Task<string?> ShowActionSheetAsync(string title, string cancel, string destruction, params string[] buttons);
+    Task ShowToastAsync(string message, int duration = 3000);
+}

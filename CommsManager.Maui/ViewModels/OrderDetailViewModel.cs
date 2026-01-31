@@ -2,6 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommsManager.Maui.Data.Models;
 using CommsManager.Maui.Services;
+using CommsManager.Maui.Interfaces;
 
 namespace CommsManager.Maui.ViewModels;
 

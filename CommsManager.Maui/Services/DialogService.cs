@@ -1,25 +1,22 @@
-namespace CommsManager.Maui.Services;
+using CommsManager.Maui.Interfaces;
 
-public interface IDialogService
-{
-    Task ShowAlertAsync(string title, string message, string cancel = "OK");
-    Task<bool> ShowConfirmationAsync(string title, string message, string accept = "Да", string cancel = "Нет");
-    Task<string?> ShowActionSheetAsync(string title, string cancel, string destruction, params string[] buttons);
-    Task ShowToastAsync(string message, int duration = 3000);
-}
+namespace CommsManager.Maui.Services;
 
 public class DialogService : IDialogService
 {
+    [Obsolete]
     public async Task ShowAlertAsync(string title, string message, string cancel = "OK")
     {
         await Shell.Current.DisplayAlert(title, message, cancel);
     }
 
+    [Obsolete]
     public async Task<bool> ShowConfirmationAsync(string title, string message, string accept = "Да", string cancel = "Нет")
     {
         return await Shell.Current.DisplayAlert(title, message, accept, cancel);
     }
 
+    [Obsolete]
     public async Task<string?> ShowActionSheetAsync(string title, string cancel, string destruction, params string[] buttons)
     {
         return await Shell.Current.DisplayActionSheet(title, cancel, destruction, buttons);

@@ -1,5 +1,6 @@
 using CommsManager.Maui.Data.Models;
 using CommsManager.Maui.Data.Repositories;
+using CommsManager.Maui.Interfaces;
 using CommsManager.Maui.Models;
 using CommsManager.Maui.Services;
 using SQLite;

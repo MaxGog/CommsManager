@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace CommsManager;
+namespace CommsManager.Maui.Platforms.MacCatalyst;
 
 public class Program
 {

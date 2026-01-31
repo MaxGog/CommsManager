@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using CommsManager.Maui.Data.Models;
 using CommsManager.Maui.Services;
 using CommsManager.Core.Enums;
+using CommsManager.Maui.Interfaces;
 
 namespace CommsManager.Maui.ViewModels;
 
@@ -12,13 +13,13 @@ public partial class OrdersViewModel : ObservableObject
     private readonly IDialogService _dialogService;
 
     [ObservableProperty]
-    private List<LocalOrder> _orders = new();
+    private List<LocalOrder> _orders = [];
 
     [ObservableProperty]
-    private List<LocalCustomer> _customers = new();
+    private List<LocalCustomer> _customers = [];
 
     [ObservableProperty]
-    private List<LocalArtistProfile> _artists = new();
+    private List<LocalArtistProfile> _artists = [];
 
     [ObservableProperty]
     private bool _isLoading;
@@ -32,15 +33,15 @@ public partial class OrdersViewModel : ObservableObject
     [ObservableProperty]
     private DateTime _selectedDate = DateTime.Today;
 
-    public List<string> StatusOptions { get; } = new()
-    {
+    public List<string> StatusOptions { get; } =
+    [
         "All",
         "New",
         "InProgress",
         "Pending",
         "Completed",
         "Cancelled"
-    };
+    ];
 
     public OrdersViewModel(DatabaseService databaseService, IDialogService dialogService)
     {

@@ -1,4 +1,7 @@
 using CommsManager.Maui.Data.Models;
+using CommsManager.Maui.Enums;
+using CommsManager.Maui.Interfaces;
+using CommsManager.Maui.Models;
 using CommsManager.Maui.Services;
 using System.Text.Json;
 
@@ -150,8 +153,7 @@ public class ArtistRepository : IArtistRepository
                 imageData, artistId, EntityImageType.ArtistPicture);
 
             artist.ArtistPicturePath = filePath;
-
-            artist.ArtistPictureBase64 = Convert.ToBase64String(imageData);
+            //artist.ArtistPictureBase64 = Convert.ToBase64String(imageData);
 
             return await UpdateAsync(artist);
         }
@@ -174,7 +176,7 @@ public class ArtistRepository : IArtistRepository
                 imageData, artistId, EntityImageType.ArtistBanner);
 
             artist.ArtistBannerPath = filePath;
-            artist.ArtistBannerBase64 = Convert.ToBase64String(imageData);
+            //artist.ArtistBannerBase64 = Convert.ToBase64String(imageData);
 
             return await UpdateAsync(artist);
         }
@@ -191,7 +193,7 @@ public class ArtistRepository : IArtistRepository
         if (artist == null)
             return null;
 
-        if (!string.IsNullOrEmpty(artist.ArtistPictureBase64))
+        /*if (!string.IsNullOrEmpty(artist.ArtistPictureBase64))
         {
             try
             {
@@ -200,7 +202,7 @@ public class ArtistRepository : IArtistRepository
             catch
             {
             }
-        }
+        }*/
 
         if (!string.IsNullOrEmpty(artist.ArtistPicturePath))
         {
@@ -216,7 +218,7 @@ public class ArtistRepository : IArtistRepository
         if (artist == null)
             return null;
 
-        if (!string.IsNullOrEmpty(artist.ArtistBannerBase64))
+        /*if (!string.IsNullOrEmpty(artist.ArtistBannerBase64))
         {
             try
             {
@@ -225,7 +227,7 @@ public class ArtistRepository : IArtistRepository
             catch
             {
             }
-        }
+        }*/
 
         if (!string.IsNullOrEmpty(artist.ArtistBannerPath))
         {

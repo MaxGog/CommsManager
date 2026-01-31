@@ -1,4 +1,5 @@
-﻿using CommsManager.Maui.Services;
+﻿using CommsManager.Maui.Interfaces;
+using CommsManager.Maui.Services;
 using CommsManager.Maui.Views;
 
 namespace CommsManager;

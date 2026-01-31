@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using CommsManager.Shared.Services;
+//using CommsManager.Shared.Services;
 using CommunityToolkit.Maui;
 using CommsManager.Maui.Services;
 using CommsManager.Maui.ViewModels;
@@ -7,6 +7,7 @@ using CommsManager.Maui.Views;
 using CommsManager.Core.Interfaces;
 using CommsManager.Maui.Data.Repositories;
 using CommsManager.Maui.Data;
+using CommsManager.Maui.Interfaces;
 
 namespace CommsManager.Maui;
 public static class MauiProgram
@@ -18,13 +19,18 @@ public static class MauiProgram
         {
             fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
         }).UseMauiCommunityToolkit();
-        builder.Services.AddMauiBlazorWebView();
-        builder.Services.AddSingleton<MockDataService>();
+        //builder.Services.AddMauiBlazorWebView();
+        //builder.Services.AddSingleton<MockDataService>();
 
         builder.Services.AddSingleton<DatabaseService>();
         builder.Services.AddSingleton<IDatabaseInitializer, DatabaseInitializer>();
         builder.Services.AddSingleton<IDatabaseMigrator, DatabaseMigrator>();
         builder.Services.AddSingleton<IDatabaseBackupService, DatabaseBackupService>();
+
+        builder.Services.AddScoped<Data.Repositories.ICustomerRepository, CustomerRepository>();
+        builder.Services.AddScoped<Data.Repositories.IOrderRepository, OrderRepository>();
+        builder.Services.AddScoped<Data.Repositories.IArtistRepository, ArtistRepository>();
+        builder.Services.AddScoped<Data.Repositories.ICommissionRepository, CommissionRepository>();
 
         builder.Services.AddSingleton<Data.IUnitOfWork, UnitOfWork>();
         builder.Services.AddSingleton<IDialogService, DialogService>();

@@ -35,32 +35,28 @@
     </Shell.Resources>
 
     <TabBar>
-        <Tab Title="Клиенты"
-                Icon="customers.png">
+        <Tab Title="Клиенты">
             <ShellContent
                 Title="Клиенты"
                 ContentTemplate="{DataTemplate views:CustomersPage}"
                 Route="Customers"/>
         </Tab>
 
-        <Tab Title="Заказы"
-                Icon="orders.png">
+        <Tab Title="Заказы">
             <ShellContent
                 Title="Заказы"
                 ContentTemplate="{DataTemplate views:OrdersPage}"
                 Route="Orders"/>
         </Tab>
 
-        <Tab Title="Художники"
-                Icon="artists.png">
+        <Tab Title="Художники">
             <ShellContent
                 Title="Художники"
                 ContentTemplate="{DataTemplate views:ArtistsPage}"
                 Route="Artists"/>
         </Tab>
 
-        <Tab Title="Профиль"
-                Icon="profile.png">
+        <Tab Title="Профиль">
             <ShellContent
                 Title="Профиль"
                 ContentTemplate="{DataTemplate views:ProfilePage}"
